@@ -16,6 +16,13 @@ jobs:
           git config user.email "hyperoot.tech@proton.me"
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - run: pip install mkdocs-material termynal
+          python-version: 3.x
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install mkdocs-material 
       - run: mkdocs gh-deploy --force
