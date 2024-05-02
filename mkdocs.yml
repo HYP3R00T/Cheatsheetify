@@ -1,0 +1,86 @@
+site_name: Cheatsheetify
+docs_dir: docs
+repo_url: https://github.com/HYP3R00T/Cheatsheetify
+repo_name: HYP3R00T/Cheatsheetify
+theme:
+  icon:
+    logo: material/graph
+  name: "material"
+  palette:
+    - scheme: default
+      accent: teal
+      primary: black
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - scheme: slate
+      accent: teal
+      primary: black
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: Source Code Pro
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - navigation.prune
+    - navigation.indexes
+    - toc.follow
+    - content.code.copy
+    - search.share
+plugins:
+  - search
+  - termynal:
+      title: shell
+      buttons: windows
+      prompt_literal_start:
+        - ">"
+  - tags
+markdown_extensions:
+  - footnotes
+  - nl2br
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - def_list
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      permalink: true
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/mermaid/dist/mermaid.min.js
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/HYP3R00T
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/rajesh-kumar-das/
+    - icon: fontawesome/brands/x-twitter
+      link: https://twitter.com/HYP3R00T
+# copyright: Copyright &copy; 2024 hyperoot.dev

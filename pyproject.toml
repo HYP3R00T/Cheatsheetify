@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "cheatsheetify"
+version = "0.1.0"
+description = ""
+authors = ["HYP3R00T <hyperoot.tech@proton.me>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+tldr = "^3.2.0"
+mkdocs-material = "^9.5.20"
+termynal = "^0.12.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
