@@ -1,5 +1,11 @@
 import subprocess
 from typing import List, Dict
+from reportlab.platypus import SimpleDocTemplate
+from reportlab.lib.pagesizes import A4
+from typing_extensions import Annotated
+import typer
+
+from cheatsheetify.pdf_generator import generate_pdf
 
 
 def generate_cheatsheet(command: str) -> Dict | str:
@@ -30,6 +36,13 @@ def generate_cheatsheet(command: str) -> Dict | str:
         return str(f"Error: {command} command not found or invalid.")
 
 
-def main(commands: List[str]):
+def main(
+    commands: Annotated[
+        List[str], typer.Argument(help="List of commands to generate cheatsheet.pdf")
+    ]
+):
+    doc = SimpleDocTemplate("cheatsheet.pdf", pagesize=A4)
+    elements: List = []
     for command in commands:
-        print(generate_cheatsheet(command))
+        generate_pdf(generate_cheatsheet(command), elements)
+    doc.build(elements)
