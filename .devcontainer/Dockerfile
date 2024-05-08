@@ -40,4 +40,3 @@ RUN echo "done 0" \
     && echo "done 3" \
     && curl -sSL https://install.python-poetry.org | python3 - \
     && poetry config virtualenvs.in-project true
-    && poetry install
