@@ -4,6 +4,8 @@ from reportlab.platypus import SimpleDocTemplate
 from reportlab.lib.pagesizes import A4
 from typing_extensions import Annotated
 import typer
+import json
+import re
 
 from cheatsheetify.pdf_generator import generate_pdf
 
@@ -14,13 +16,21 @@ def generate_cheatsheet(command: str) -> Dict | str:
             ["tldr", command], stderr=subprocess.STDOUT, universal_newlines=True
         )
         lines: List[str] = output.split("\n")
-        infolines: List[str] = lines[:5]
+        infolines: List[str] = []
+        commandlines: List[str] = []
+        blank_line = 0
+        for idx, line in enumerate(lines):
+            if blank_line == 3:
+                infolines = lines[:idx]
+                commandlines = lines[idx:]
+                break
+            elif line == "":
+                blank_line += 1
         info_dict: Dict = {
             "command": command,
-            "description": infolines[3].strip()[:-1],
-            "homepage": infolines[-1].strip()[18:-1],
+            "description": " ".join(x.strip() for x in infolines[3:-2]),
+            "homepage": re.search(r"https?://\S+", infolines[-2].strip()).group()[:-1],
         }
-        commandlines: List[str] = lines[6:]
         comamnd_dict: Dict = {}
         temp: str = ""
         for line in commandlines:
@@ -30,7 +40,7 @@ def generate_cheatsheet(command: str) -> Dict | str:
                 if line.strip() not in comamnd_dict.keys():
                     comamnd_dict[line.strip()] = temp
         cheatsheet_dict: Dict = {"info": info_dict, "commands": comamnd_dict}
-        return cheatsheet_dict
+        return json.dumps(cheatsheet_dict)
     except subprocess.CalledProcessError:
         print(f"Error: {command} command not found or invalid.")
         return str(f"Error: {command} command not found or invalid.")
