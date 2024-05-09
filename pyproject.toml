@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cheatsheetify"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["HYP3R00T <hyperoot.tech@proton.me>"]
 license = "MIT"
