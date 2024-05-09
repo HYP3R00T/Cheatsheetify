@@ -11,8 +11,14 @@ import cheatsheetify.themes as themes
 
 
 class PDF(FPDF):
+    background_color = (255, 255, 255)
+
+    def header(self):
+        self.set_background_color(*self.background_color)
+
     def set_background_color(self, r, g, b):
         self.set_fill_color(r, g, b)
+        self.background_color = r, g, b
         self.rect(0, 0, self.w, self.h, "F")
 
 
@@ -87,6 +93,7 @@ def main(
     pdf.output(f"{filename}.pdf")
 
     # print list of command that doesn't have cheatsheet
-    print("Couldn't generate cheat sheet for the following command(s)")
-    for x in missing_commands:
-        print(str(x))
+    if missing_commands:
+        print("Couldn't generate cheat sheet for the following command(s)")
+        for x in missing_commands:
+            print(str(x))
