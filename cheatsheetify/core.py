@@ -24,6 +24,8 @@ class PDF(FPDF):
 
 class Schema(str, Enum):
     Macchiato = "Macchiato"
+    Nord = "Nord"
+    Rose = "Rose"
 
 
 def main(
@@ -33,31 +35,33 @@ def main(
             help="List of commands to generate cheatsheet.pdf", show_default=False
         ),
     ],
+    title: Annotated[str, typer.Option(help="Provide the title")] = "Cheat Sheet",
     filename: Annotated[
         str, typer.Option(help="Provide the filename for PDF")
     ] = "cheatsheet",
-    scheme: Annotated[
-        Schema, typer.Option(help="Provide a color scheme")
-    ] = Schema.Macchiato,
-    give_credits: Annotated[bool, typer.Option(help="Provide a color scheme")] = True,
+    theme: Annotated[Schema, typer.Option(help="Select a theme")] = Schema.Macchiato,
+    credits: Annotated[
+        bool, typer.Option(help="Give credit to cheatsheetify in PDF")
+    ] = True,
 ):
 
-    palatte = getattr(themes, f"{scheme}")
+    palatte = getattr(themes, f"{theme}")
     pdf = PDF()
     pdf.add_page()
     pdf.set_background_color(*palatte["background"])
 
     # Add custom fonts
     pdf.add_font("inter", style="", fname="cheatsheetify/fonts/Inter.ttf")
+    pdf.add_font("inter", style="I", fname="cheatsheetify/fonts/Inter-Italic.ttf")
     pdf.add_font("firacode", style="", fname="cheatsheetify/fonts/FiraCode.ttf")
 
     # Add header title
     pdf.set_font(family="inter", style="", size=32)
     pdf.set_text_color(*palatte["orange"])
-    pdf.multi_cell(w=0, text="Cheat Sheet", new_x="LEFT", new_y="NEXT", align="C")
+    pdf.multi_cell(w=0, text=title, new_x="LEFT", new_y="NEXT", align="C")
 
     # Add credit
-    if give_credits:
+    if credits:
         pdf.ln(2)
         pdf.set_font(family="firacode", style="", size=12)
         pdf.set_text_color(*palatte["red"])
@@ -71,14 +75,14 @@ def main(
         )
 
     # Add line
-    pdf.ln(5)
+    pdf.ln(7)
     pdf.set_line_width(0.5)
     pdf.set_draw_color(*palatte["background_secondary"])
     pdf.set_dash_pattern(dash=2, gap=2)
     line_width = 199
     line_x = pdf.w / 2 - line_width / 2
     pdf.line(line_x, pdf.y, line_x + line_width, pdf.y)
-    pdf.ln(15)
+    pdf.ln(7)
 
     # Generate pdf elements for each command
     missing_commands = []
