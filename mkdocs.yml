@@ -7,13 +7,15 @@ theme:
     logo: material/graph
   name: "material"
   palette:
-    - scheme: default
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       accent: teal
       primary: black
       toggle:
         icon: material/toggle-switch
         name: Switch to dark mode
-    - scheme: slate
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
       accent: teal
       primary: black
       toggle:
@@ -26,7 +28,7 @@ theme:
     - navigation.instant
     - navigation.instant.progress
     - navigation.tracking
-    - navigation.tabs
+    # - navigation.tabs
     - navigation.path
     - navigation.indexes
     - navigation.top
@@ -81,6 +83,4 @@ extra:
       link: https://github.com/HYP3R00T
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/rajesh-kumar-das/
-    - icon: fontawesome/brands/x-twitter
-      link: https://twitter.com/HYP3R00T
-# copyright: Copyright &copy; 2024 hyperoot.dev
+copyright: Copyright &copy; 2024 hyperoot.dev

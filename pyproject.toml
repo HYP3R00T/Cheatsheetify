@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "cheatsheetify"
-version = "0.1.1"
-description = ""
+version = "0.1.2"
+description = "cheatsheetify is a command-line tool that generates PDF versions of cheatsheets for popular command-line tools"
 authors = ["HYP3R00T <hyperoot.tech@proton.me>"]
 license = "MIT"
 readme = "README.md"
