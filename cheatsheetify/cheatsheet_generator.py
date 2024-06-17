@@ -1,6 +1,6 @@
-from typing import List, Dict
-import subprocess
 import re
+import subprocess
+from typing import Dict, List
 
 
 def generate_cheatsheet(command: str) -> Dict | str:
